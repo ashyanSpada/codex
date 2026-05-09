@@ -408,6 +408,7 @@ fn test_model_client_session() -> crate::client::ModelClientSession {
         /*include_timing_metrics*/ false,
         /*beta_features_header*/ None,
         /*attestation_provider*/ None,
+        /*disable_websockets*/ false,
     )
     .new_session()
 }

@@ -676,14 +676,18 @@ pub async fn run_main_with_transport_options(
             transport_accept_handles.push(accept_handle);
         }
         AppServerTransport::WebSocket { bind_address } => {
-            let accept_handle = start_websocket_acceptor(
-                *bind_address,
-                transport_event_tx.clone(),
-                transport_shutdown_token.clone(),
-                policy_from_settings(&auth)?,
-            )
-            .await?;
-            transport_accept_handles.push(accept_handle);
+            if config.disable_websockets {
+                warn!("WebSocket transport disabled by configuration (disable_websockets = true)");
+            } else {
+                let accept_handle = start_websocket_acceptor(
+                    *bind_address,
+                    transport_event_tx.clone(),
+                    transport_shutdown_token.clone(),
+                    policy_from_settings(&auth)?,
+                )
+                .await?;
+                transport_accept_handles.push(accept_handle);
+            }
         }
         AppServerTransport::Off => {}
     }
