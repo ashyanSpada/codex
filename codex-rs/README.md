@@ -7,11 +7,11 @@ We provide Codex CLI as a standalone executable to ensure a zero-dependency inst
 Today, the easiest way to install Codex is via `npm`:
 
 ```shell
-npm i -g @openai/codex
+npm i -g @ashyan/codex_plus
 codex
 ```
 
-You can also install via Homebrew (`brew install --cask codex`) or download a platform-specific release directly from our [GitHub Releases](https://github.com/openai/codex/releases).
+You can also install via Homebrew (`brew install --cask codex_plus`) or download a platform-specific release directly from our [GitHub Releases](https://github.com/ashyanSpada/codex/releases).
 
 ## Documentation quickstart
 

@@ -53,7 +53,14 @@ jobs:
           # Passing the workflow URL directly avoids relying on old rust-v*
           # branches remaining discoverable via `gh run list --branch ...`.
           CODEX_VERSION=0.125.0
-          WORKFLOW_URL="https://github.com/openai/codex/actions/runs/24901475298"
+          WORKFLOW_URL="$(gh run list \
+            --workflow .github/workflows/rust-release.yml \
+            --json url,conclusion \
+            --jq 'first(map(select(.conclusion == "success"))[].url)')"
+          if [[ -z "${WORKFLOW_URL}" || "${WORKFLOW_URL}" == "null" ]]; then
+            echo "Unable to resolve a successful rust-release workflow URL in ${GITHUB_REPOSITORY}."
+            exit 1
+          fi
           OUTPUT_DIR="${RUNNER_TEMP}"
           # This reused workflow predates the standalone bwrap artifact.
           python3 ./scripts/stage_npm_packages.py \

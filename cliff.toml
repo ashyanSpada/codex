@@ -4,7 +4,7 @@
 header = """
 # Changelog
 
-You can install any of these versions: `npm install -g @openai/codex@<version>`
+You can install any of these versions: `npm install -g @ashyan/codex_plus@<version>`
 """
 
 body = """
@@ -27,18 +27,18 @@ footer = """
 <!-- generated - do not edit -->
 """
 
-trim = true
 postprocessors = []
+trim = true
 
 [git]
 conventional_commits = true
 
 commit_parsers = [
   { message = "^feat", group = "<!-- 0 -->🚀 Features" },
-  { message = "^fix",  group = "<!-- 1 -->🪲 Bug Fixes" },
+  { message = "^fix", group = "<!-- 1 -->🪲 Bug Fixes" },
   { message = "^bump", group = "<!-- 6 -->🛳️ Release" },
   # Fallback – skip anything that didn't match the above rules.
-  { message = ".*",  group = "<!-- 10 -->💼 Other" },
+  { message = ".*", group = "<!-- 10 -->💼 Other" },
 ]
 
 filter_unconventional = false
