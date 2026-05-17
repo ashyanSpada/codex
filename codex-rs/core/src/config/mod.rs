@@ -928,6 +928,11 @@ pub struct Config {
     /// or placeholder replacement will occur for fast keypress bursts.
     pub disable_paste_burst: bool,
 
+    /// When `true`, disables WebSocket connections globally (both app-server
+    /// transport and Responses API WebSocket transport). This forces fallback
+    /// to HTTP-based transports. Defaults to `false`.
+    pub disable_websockets: bool,
+
     /// When `false`, disables analytics across Codex product surfaces in this machine.
     /// Voluntarily left as Optional because the default value might depend on the client.
     pub analytics_enabled: Option<bool>,
@@ -3435,6 +3440,7 @@ impl Config {
             notices,
             check_for_update_on_startup,
             disable_paste_burst: cfg.disable_paste_burst.unwrap_or(false),
+            disable_websockets: cfg.disable_websockets.unwrap_or(false),
             analytics_enabled: config_profile
                 .analytics
                 .as_ref()

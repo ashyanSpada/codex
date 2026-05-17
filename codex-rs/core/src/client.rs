@@ -321,6 +321,7 @@ impl ModelClient {
         include_timing_metrics: bool,
         beta_features_header: Option<String>,
         attestation_provider: Option<Arc<dyn AttestationProvider>>,
+        disable_websockets: bool,
     ) -> Self {
         let model_provider = create_model_provider(provider_info, auth_manager);
         let codex_api_key_env_enabled = model_provider
@@ -345,7 +346,7 @@ impl ModelClient {
                 beta_features_header,
                 include_attestation,
                 attestation_provider,
-                disable_websockets: AtomicBool::new(false),
+                disable_websockets: AtomicBool::new(disable_websockets),
                 cached_websocket_session: StdMutex::new(WebsocketSession::default()),
             }),
         }
